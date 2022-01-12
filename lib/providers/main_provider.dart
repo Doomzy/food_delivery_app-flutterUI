@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:food_delivery_app/screens/home/home_screen.dart';
+import 'package:food_delivery_app/screens/account/account_screen.dart';
 import 'package:food_delivery_app/shared/shared_pref/shared_pref.dart';
 import 'package:food_delivery_app/shared/utils/utils.dart';
 
@@ -13,7 +13,7 @@ class MainProvider extends ChangeNotifier {
 
   void finishOnBoarding(context) {
     CacheHandler.savePref(key: 'onBoarding', value: true);
-    navigateToAndRemove(context: context, destination: HomeScreen());
+    navigateToAndRemove(context: context, destination: AccountScreen());
     notifyListeners();
   }
 }
