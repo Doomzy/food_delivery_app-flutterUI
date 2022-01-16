@@ -4,8 +4,8 @@ Widget circleLogo({double scale = 100, name = 'logo'}) => Stack(
       alignment: AlignmentDirectional.center,
       children: [
         Container(
-          width: 75,
-          height: 75,
+          width: scale / 1.3,
+          height: scale / 1.3,
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(200),
@@ -52,11 +52,12 @@ Widget customButton({
       onPressed: onPressed,
     );
 
-Widget customTextField({required hint, prefix}) => Container(
+Widget customTextField({required hint, prefix, bgColor = Colors.white}) =>
+    Container(
       margin: const EdgeInsetsDirectional.only(bottom: 20),
       width: double.infinity,
       decoration: ShapeDecoration(
-        color: Colors.white,
+        color: bgColor,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10),
         ),
@@ -68,7 +69,7 @@ Widget customTextField({required hint, prefix}) => Container(
             vertical: 20,
           ),
           border: InputBorder.none,
-          fillColor: Colors.white,
+          fillColor: bgColor,
           hintText: hint,
           hintStyle: const TextStyle(
             color: Color.fromRGBO(160, 160, 160, 0.6),
@@ -77,5 +78,46 @@ Widget customTextField({required hint, prefix}) => Container(
           ),
           prefixIcon: prefix,
         ),
+      ),
+    );
+
+Widget savedLocation({
+  required icon,
+  required locationHeader,
+  required VoidCallback onTap,
+  locationAddress,
+}) =>
+    InkWell(
+      onTap: onTap,
+      child: Row(
+        children: [
+          Icon(icon, size: 40),
+          const SizedBox(width: 25),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  locationHeader,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.w600,
+                    fontSize: 17,
+                  ),
+                ),
+                locationAddress != null
+                    ? Text(
+                        locationAddress,
+                        maxLines: null,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.w500,
+                          fontSize: 16,
+                          color: Color.fromRGBO(178, 178, 178, 1),
+                        ),
+                      )
+                    : const SizedBox(),
+              ],
+            ),
+          )
+        ],
       ),
     );

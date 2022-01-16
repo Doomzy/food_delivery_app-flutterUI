@@ -13,7 +13,7 @@ class Layout extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<MainProvider>(
-          create: (context) => MainProvider(),
+          create: (context) => MainProvider()..getPermission(),
         ),
         ChangeNotifierProvider<LoginSignupProvider>(
           create: (context) => LoginSignupProvider()..addTabs(),
