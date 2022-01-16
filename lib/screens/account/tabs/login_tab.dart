@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery_app/providers/loginsignup_provider.dart';
-import 'package:food_delivery_app/screens/home/home_screen.dart';
+import 'package:food_delivery_app/screens/location/location_screen.dart';
 import 'package:food_delivery_app/shared/components/components.dart';
 import 'package:food_delivery_app/shared/utils/utils.dart';
 import 'package:provider/provider.dart';
@@ -28,8 +28,8 @@ class LoginTab extends StatelessWidget {
           ),
         ),
         customButton(
-          onPressed: () =>
-              navigateToAndRemove(context: context, destination: HomeScreen()),
+          onPressed: () => navigateToAndRemove(
+              context: context, destination: LocationScreen()),
           text: 'Login',
           bgColor: const Color.fromRGBO(248, 119, 74, 1),
           textColor: Colors.white,
@@ -47,8 +47,8 @@ class LoginTab extends StatelessWidget {
         ),
         const SizedBox(height: 10),
         customButton(
-          onPressed: () =>
-              navigateToAndRemove(context: context, destination: HomeScreen()),
+          onPressed: () => navigateToAndRemove(
+              context: context, destination: LocationScreen()),
           text: 'Log In with Facebook',
           icon: 'assets/icons/facebook.png',
           bgColor: const Color.fromRGBO(24, 119, 242, 1),
@@ -57,8 +57,8 @@ class LoginTab extends StatelessWidget {
         ),
         const SizedBox(height: 20),
         customButton(
-          onPressed: () =>
-              navigateToAndRemove(context: context, destination: HomeScreen()),
+          onPressed: () => navigateToAndRemove(
+              context: context, destination: LocationScreen()),
           text: 'Log In with Google',
           icon: 'assets/icons/google.png',
           bgColor: Colors.white,
