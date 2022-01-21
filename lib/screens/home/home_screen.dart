@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery_app/providers/home_provider.dart';
-import 'package:food_delivery_app/shared/components/components.dart';
 import 'package:provider/provider.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -10,16 +9,23 @@ class HomeScreen extends StatelessWidget {
         builder: (context, hp, child) => Scaffold(
               backgroundColor: Colors.white,
               body: SafeArea(
-                child: Column(
-                  children: [
-                    customAppBar(context: context),
-                    hp.homeTabs[hp.currentTabId],
-                  ],
+                child: SingleChildScrollView(
+                  child: hp.homeTabs[hp.currentTabId],
                 ),
               ),
               bottomNavigationBar: Container(
                 height: MediaQuery.of(context).size.height * 0.1,
-                padding: const EdgeInsets.only(top: 20),
+                decoration: const BoxDecoration(
+                  color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Color.fromRGBO(255, 104, 56, 0.15),
+                      offset: Offset(0, -3),
+                      blurRadius: 30,
+                      spreadRadius: 0,
+                    )
+                  ],
+                ),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
