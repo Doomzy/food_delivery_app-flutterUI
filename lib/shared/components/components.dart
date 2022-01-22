@@ -1,4 +1,3 @@
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:food_delivery_app/models/models.dart';
 import 'package:food_delivery_app/screens/location/location_screen.dart';
@@ -349,6 +348,67 @@ Widget userPreferences({required context}) => Padding(
       ),
     );
 
+Widget cardMainText({required text}) => Text(
+      text,
+      maxLines: 2,
+      overflow: TextOverflow.ellipsis,
+      style: const TextStyle(
+        fontSize: 17,
+        fontFamily: 'Metropolis',
+        fontWeight: FontWeight.bold,
+      ),
+    );
+
+Widget cardSecondaryText({required text}) => Text(
+      text,
+      maxLines: 2,
+      style: const TextStyle(
+        fontSize: 14,
+        fontWeight: FontWeight.w300,
+        color: Color.fromRGBO(122, 122, 122, 1),
+      ),
+    );
+
+Widget priceText({
+  required price,
+  discount = false,
+  color = const Color.fromRGBO(248, 137, 34, 1),
+}) =>
+    Text(
+      price,
+      style: TextStyle(
+        color: color,
+        decoration: discount ? TextDecoration.lineThrough : TextDecoration.none,
+        fontFamily: 'Metropolis',
+        fontWeight: FontWeight.w700,
+        fontSize: discount ? 12 : 17,
+      ),
+    );
+
+Widget tagText({required tag, margin = false}) => Container(
+      margin: margin
+          ? const EdgeInsetsDirectional.only(start: 14)
+          : const EdgeInsets.all(0),
+      padding: const EdgeInsetsDirectional.all(5),
+      decoration: ShapeDecoration(
+        color: Colors.white,
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(13),
+            side: const BorderSide(
+              color: Colors.grey,
+              width: 0.5,
+            )),
+      ),
+      child: Text(
+        tag,
+        style: const TextStyle(
+          fontSize: 10,
+          color: Color.fromRGBO(112, 112, 112, 1),
+          fontWeight: FontWeight.w700,
+        ),
+      ),
+    );
+
 Widget carouselItem({
   required context,
   required item,
@@ -401,50 +461,23 @@ Widget carouselItem({
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    item.name,
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(
-                      fontSize: 17,
-                      fontFamily: 'Metropolis',
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
+                  cardMainText(text: item.name),
                   const SizedBox(height: 5),
-                  Text(
-                    ismeal ? item.resturant : item.tags.join(", "),
-                    maxLines: 2,
-                    style: const TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w300,
-                      color: Color.fromRGBO(122, 122, 122, 1),
-                    ),
+                  cardSecondaryText(
+                    text: ismeal ? item.resturant : item.tags.join(", "),
                   ),
                   const Spacer(),
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      Text(
-                        ismeal ? '\$${item.price}' : '',
-                        style: const TextStyle(
-                          color: Color.fromRGBO(248, 137, 34, 1),
-                          fontFamily: 'Metropolis',
-                          fontWeight: FontWeight.w700,
-                          fontSize: 17,
-                        ),
-                      ),
+                      priceText(price: ismeal ? '\$${item.price}' : ''),
                       const SizedBox(width: 5),
                       Visibility(
                         visible: item.discount,
-                        child: Text(
-                          ismeal ? '\$${item.oldPrice}' : '',
-                          style: const TextStyle(
-                            decoration: TextDecoration.lineThrough,
-                            fontFamily: 'Metropolis',
-                            fontWeight: FontWeight.w700,
-                            fontSize: 12,
-                          ),
+                        child: priceText(
+                          price: ismeal ? '\$${item.oldPrice}' : '',
+                          discount: true,
+                          color: Colors.black,
                         ),
                       ),
                       const Spacer(),
@@ -498,27 +531,7 @@ Widget carouselItem({
             //Free delivery
             Visibility(
               visible: item.freeDelivery,
-              child: Container(
-                margin: const EdgeInsetsDirectional.only(start: 14),
-                padding: const EdgeInsetsDirectional.all(5),
-                decoration: ShapeDecoration(
-                  color: Colors.white,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(13),
-                      side: const BorderSide(
-                        color: Colors.grey,
-                        width: 0.5,
-                      )),
-                ),
-                child: const Text(
-                  'FREE DELIVERY',
-                  style: TextStyle(
-                    fontSize: 10,
-                    color: Color.fromRGBO(112, 112, 112, 1),
-                    fontWeight: FontWeight.w700,
-                  ),
-                ),
-              ),
+              child: tagText(tag: 'FREE DELIVERY', margin: true),
             )
           ],
         ),

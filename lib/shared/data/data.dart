@@ -67,3 +67,88 @@ List<ResturantItem> saveMoneyResturants = [
     discountAmount: 50,
   ),
 ];
+
+List<OrderItem> prevOrders = [
+  OrderItem(
+    resturantName: 'KFC',
+    resturantImg: 'assets/resturants/resturant2.jpg',
+    orderTimeDate: 'Yestrday 3pm',
+    totalPrice: 250,
+    items: ['1 Cheese Burger', '2 French Fries', '1 Pepsi'],
+  ),
+  OrderItem(
+    resturantName: 'Biryanis and more',
+    resturantImg: 'assets/resturants/resturant3.jpg',
+    orderTimeDate: '22/05/2021 6pm',
+    totalPrice: 250,
+    items: ['1 Kacchi biriyani', '1 chilli onion', '1 Fanta'],
+  ),
+];
+
+List<ResturantItem> popularResturants = [
+  ResturantItem(
+    name: 'KFC',
+    img: 'assets/resturants/resturant1.jpg',
+    tags: ['Fast food', 'Fried Chicken'],
+    freeDelivery: true,
+    discount: true,
+    discountAmount: 25,
+  ),
+  ResturantItem(
+    name: 'Burger King',
+    img: 'assets/resturants/resturant2.jpg',
+    tags: ['Burgers', 'Bevarages'],
+  ),
+  ResturantItem(
+    name: 'Paradise Restaurant',
+    img: 'assets/resturants/resturant3.jpg',
+    tags: ['Halal Food'],
+    freeDelivery: true,
+  ),
+];
+
+List<ResturantItem> allResturants = [
+  ResturantItem(
+    name: 'Pizza Hut',
+    img: 'assets/resturants/resturant1.jpg',
+    tags: [
+      'Home cook ',
+      'Fast food',
+      'Burger',
+      'Home cook',
+      'Fast food',
+      'Burger'
+    ],
+    freeDelivery: true,
+    rescued: true,
+    discount: true,
+    discountAmount: 50,
+  ),
+  ResturantItem(
+    name: 'Burger King',
+    img: 'assets/resturants/resturant2.jpg',
+    tags: ['Burgers', 'Bevarages'],
+  ),
+  ResturantItem(
+    name: 'KFC',
+    img: 'assets/resturants/resturant3.jpg',
+    tags: ['Fast food', 'Fried Chicken'],
+    rescued: true,
+  ),
+  ResturantItem(
+    name: 'Paradise Restaurant',
+    img: 'assets/resturants/resturant1.jpg',
+    tags: ['Halal Food'],
+    discount: true,
+    discountAmount: 15,
+  ),
+  ResturantItem(
+    name: 'Cream Stone',
+    img: 'assets/resturants/resturant1.jpg',
+    tags: ['Ice cream', 'Desserts'],
+    freeDelivery: true,
+    discount: true,
+    discountAmount: 25,
+    closeAt: 11,
+  ),
+];
