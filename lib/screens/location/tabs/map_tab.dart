@@ -3,7 +3,6 @@ import 'package:food_delivery_app/providers/main_provider.dart';
 import 'package:food_delivery_app/screens/home/home_screen.dart';
 import 'package:food_delivery_app/shared/components/components.dart';
 import 'package:food_delivery_app/shared/utils/utils.dart';
-import 'package:latlong2/latlong.dart';
 import 'package:provider/provider.dart';
 
 import 'package:flutter_map/flutter_map.dart';

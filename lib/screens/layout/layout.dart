@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_delivery_app/providers/home_provider.dart';
 import 'package:food_delivery_app/providers/loginsignup_provider.dart';
 import 'package:food_delivery_app/providers/main_provider.dart';
 import 'package:food_delivery_app/shared/styles/themes.dart';
@@ -17,6 +18,9 @@ class Layout extends StatelessWidget {
         ),
         ChangeNotifierProvider<LoginSignupProvider>(
           create: (context) => LoginSignupProvider()..addTabs(),
+        ),
+        ChangeNotifierProvider<HomeProvider>(
+          create: (context) => HomeProvider(),
         ),
       ],
       child: MaterialApp(
