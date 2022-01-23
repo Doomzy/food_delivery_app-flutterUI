@@ -10,8 +10,11 @@ class MealItem {
   String img;
   int price;
   int oldPrice;
+  int totCals;
+  double resturantRating;
   bool freeDelivery;
   bool discount;
+  bool rescued;
 
   MealItem({
     required this.name,
@@ -20,7 +23,10 @@ class MealItem {
     required this.price,
     this.discount = false,
     this.freeDelivery = false,
+    this.rescued = false,
     this.oldPrice = 1,
+    this.totCals = 120,
+    this.resturantRating = 5,
   });
 }
 

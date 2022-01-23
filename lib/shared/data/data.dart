@@ -39,6 +39,7 @@ List<MealItem> breakfastMeals = [
     price: 5,
     oldPrice: 10,
     discount: true,
+    rescued: true,
     freeDelivery: true,
   ),
 ];
@@ -150,5 +151,41 @@ List<ResturantItem> allResturants = [
     discount: true,
     discountAmount: 25,
     closeAt: 11,
+  ),
+];
+
+List<MealItem> offersMeals = [
+  MealItem(
+    name: 'Fried Rice',
+    resturant: 'Pista House',
+    img: 'assets/resturants/resturant1.jpg',
+    totCals: 100,
+    price: 100,
+    discount: true,
+    rescued: true,
+    freeDelivery: true,
+    oldPrice: 200,
+    resturantRating: 4,
+  ),
+  MealItem(
+    name: 'Jollof Rice',
+    resturant: 'Suhani’s Stop',
+    img: 'assets/resturants/resturant2.jpg',
+    totCals: 120,
+    price: 75,
+    discount: true,
+    freeDelivery: true,
+    oldPrice: 100,
+    resturantRating: 3.5,
+  ),
+  MealItem(
+    name: 'KFC Nuggets',
+    resturant: 'KFC',
+    img: 'assets/resturants/resturant3.jpg',
+    totCals: 145,
+    price: 50,
+    discount: true,
+    oldPrice: 60,
+    resturantRating: 5,
   ),
 ];

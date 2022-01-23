@@ -385,13 +385,21 @@ Widget priceText({
       ),
     );
 
-Widget tagText({required tag, margin = false}) => Container(
+Widget tagText({
+  required tag,
+  margin = false,
+  bgColor = Colors.white,
+  txtColor = const Color.fromRGBO(112, 112, 112, 1),
+  double txtSize = 10,
+  suffix,
+}) =>
+    Container(
       margin: margin
           ? const EdgeInsetsDirectional.only(start: 14)
           : const EdgeInsets.all(0),
       padding: const EdgeInsetsDirectional.all(5),
       decoration: ShapeDecoration(
-        color: Colors.white,
+        color: bgColor,
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(13),
             side: const BorderSide(
@@ -399,17 +407,69 @@ Widget tagText({required tag, margin = false}) => Container(
               width: 0.5,
             )),
       ),
-      child: Text(
-        tag,
-        style: const TextStyle(
-          fontSize: 10,
-          color: Color.fromRGBO(112, 112, 112, 1),
-          fontWeight: FontWeight.w700,
-        ),
+      child: Row(
+        children: [
+          Text(
+            tag,
+            style: TextStyle(
+              fontSize: txtSize,
+              color: txtColor,
+              fontWeight: FontWeight.w700,
+            ),
+          ),
+          Visibility(
+              visible: suffix != null ? true : false,
+              child: Row(
+                children: [
+                  const SizedBox(width: 5),
+                  Icon(
+                    suffix,
+                    color: txtColor,
+                    size: txtSize + 5,
+                  )
+                ],
+              ))
+        ],
       ),
     );
 
-Widget carouselItem({
+Widget overImgTag({
+  required item,
+  required isMeal,
+  double mTop = 14,
+  double txtSize = 13,
+}) {
+  return Visibility(
+    visible: item.discount,
+    child: Container(
+      margin: EdgeInsetsDirectional.only(top: mTop),
+      padding: const EdgeInsetsDirectional.all(5),
+      decoration: const BoxDecoration(
+        borderRadius: BorderRadiusDirectional.only(
+          topStart: Radius.elliptical(20, 5),
+          topEnd: Radius.elliptical(20, 10),
+          bottomEnd: Radius.elliptical(20, 10),
+        ),
+        gradient: LinearGradient(colors: [
+          Color.fromRGBO(250, 87, 105, 1),
+          Color.fromRGBO(252, 167, 133, 1),
+        ]),
+      ),
+      child: Text(
+        isMeal
+            ? '${item.oldPrice == null ? 0 : ((item.oldPrice - item.price) / item.oldPrice * 100).round()}% OFF'
+            : '${item.discountAmount}% OFF',
+        style: TextStyle(
+          fontSize: txtSize,
+          color: Colors.white,
+          fontWeight: FontWeight.w700,
+        ),
+      ),
+    ),
+  );
+}
+
+Widget carouselVerticalItem({
   required context,
   required item,
   required border,
@@ -499,34 +559,7 @@ Widget carouselItem({
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             //discount
-            Visibility(
-              visible: item.discount,
-              child: Container(
-                margin: const EdgeInsetsDirectional.only(top: 14),
-                padding: const EdgeInsetsDirectional.all(5),
-                decoration: const BoxDecoration(
-                  borderRadius: BorderRadiusDirectional.only(
-                    topStart: Radius.circular(13),
-                    topEnd: Radius.circular(50.0),
-                    bottomEnd: Radius.circular(50.0),
-                  ),
-                  gradient: LinearGradient(colors: [
-                    Color.fromRGBO(250, 87, 105, 1),
-                    Color.fromRGBO(252, 167, 133, 1),
-                  ]),
-                ),
-                child: Text(
-                  ismeal
-                      ? '${item.oldPrice == null ? 0 : ((item.oldPrice - item.price) / item.oldPrice * 100).round()}% OFF'
-                      : '${item.discountAmount}% OFF',
-                  style: const TextStyle(
-                    fontSize: 13,
-                    color: Colors.white,
-                    fontWeight: FontWeight.w700,
-                  ),
-                ),
-              ),
-            ),
+            overImgTag(item: item, isMeal: ismeal),
             const Spacer(),
             //Free delivery
             Visibility(
@@ -536,6 +569,140 @@ Widget carouselItem({
           ],
         ),
       ),
+    ],
+  );
+}
+
+Widget carouselHorizontalItem({
+  required context,
+  required item,
+}) {
+  double cardHeight = MediaQuery.of(context).size.height;
+  return Stack(
+    children: [
+      Container(
+        clipBehavior: Clip.hardEdge,
+        decoration: ShapeDecoration(
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(13),
+              side: const BorderSide(
+                color: Color.fromRGBO(200, 200, 200, 1),
+              )),
+        ),
+        height: cardHeight * 0.35,
+        margin: const EdgeInsets.symmetric(vertical: 20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(
+              height: cardHeight * 0.17,
+              width: double.infinity,
+              child: Image.asset(
+                item.img,
+                fit: BoxFit.cover,
+              ),
+            ),
+            Container(
+              height: cardHeight * 0.12,
+              padding: const EdgeInsets.symmetric(
+                horizontal: 20,
+                vertical: 15,
+              ),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      cardMainText(text: item.name),
+                      cardSecondaryText(text: item.resturant),
+                      const Spacer(),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          priceText(price: '\$${item.price}'),
+                          const SizedBox(width: 5),
+                          Visibility(
+                            visible: item.discount,
+                            child: priceText(
+                              price: '\$${item.oldPrice}',
+                              discount: true,
+                              color: Colors.black,
+                            ),
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
+                  const Spacer(),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      tagText(
+                        tag: item.resturantRating.toString(),
+                        bgColor: const Color.fromRGBO(80, 152, 7, 1),
+                        txtColor: Colors.white,
+                        txtSize: 15,
+                        suffix: Icons.star,
+                      ),
+                      const Spacer(),
+                      Row(
+                        children: [
+                          const Icon(
+                            Icons.local_fire_department,
+                            color: Colors.orange,
+                          ),
+                          cardSecondaryText(text: item.totCals.toString())
+                        ],
+                      )
+                    ],
+                  )
+                ],
+              ),
+            ),
+            const Divider(),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: Row(
+                children: [
+                  Visibility(
+                    visible: item.freeDelivery,
+                    child: Row(
+                      children: [
+                        tagText(tag: 'FREE DELIVERY'),
+                        const SizedBox(width: 10),
+                      ],
+                    ),
+                  ),
+                  Visibility(
+                    visible: item.rescued,
+                    child: Row(
+                      children: [
+                        tagText(tag: 'RESCUED'),
+                        const SizedBox(width: 10),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+      SizedBox(
+        height: MediaQuery.of(context).size.height * 0.34,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            overImgTag(
+              item: item,
+              isMeal: true,
+              mTop: 50,
+              txtSize: 15,
+            ),
+          ],
+        ),
+      )
     ],
   );
 }
@@ -554,7 +721,7 @@ Widget customCarouselSlider({
         scrollDirection: Axis.horizontal,
         physics: const BouncingScrollPhysics(),
         itemCount: items.length,
-        itemBuilder: (context, i) => carouselItem(
+        itemBuilder: (context, i) => carouselVerticalItem(
           context: context,
           item: items[i],
           border: itemBorder,
