@@ -26,8 +26,10 @@ Widget customButton({
   bgColor = Colors.white,
   textColor = const Color.fromRGBO(255, 70, 10, 1),
   double height = 70.0,
+  double txtSize = 17,
   icon,
   bool border = false,
+  double bRaduis = 30,
 }) =>
     MaterialButton(
       elevation: 0,
@@ -45,12 +47,12 @@ Widget customButton({
               : const SizedBox(),
           Text(
             text,
-            style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w700),
+            style: TextStyle(fontSize: txtSize, fontWeight: FontWeight.w700),
           )
         ],
       ),
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(30),
+        borderRadius: BorderRadius.circular(bRaduis),
         side: border == true
             ? const BorderSide(
                 color: Color.fromRGBO(200, 200, 200, 1),
@@ -61,9 +63,16 @@ Widget customButton({
       onPressed: onPressed,
     );
 
-Widget customTextField({required hint, prefix, bgColor = Colors.white}) =>
+Widget customTextField({
+  required hint,
+  prefix,
+  bgColor = Colors.white,
+  double mBottom = 20,
+  double hPadding = 10,
+  double vPadding = 20,
+}) =>
     Container(
-      margin: const EdgeInsetsDirectional.only(bottom: 20),
+      margin: EdgeInsetsDirectional.only(bottom: mBottom),
       width: double.infinity,
       decoration: ShapeDecoration(
         color: bgColor,
@@ -73,9 +82,9 @@ Widget customTextField({required hint, prefix, bgColor = Colors.white}) =>
       ),
       child: TextFormField(
         decoration: InputDecoration(
-          contentPadding: const EdgeInsets.symmetric(
-            horizontal: 10,
-            vertical: 20,
+          contentPadding: EdgeInsets.symmetric(
+            horizontal: hPadding,
+            vertical: vPadding,
           ),
           border: InputBorder.none,
           fillColor: bgColor,
