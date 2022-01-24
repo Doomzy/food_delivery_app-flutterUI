@@ -71,3 +71,33 @@ class OrderItem {
     required this.items,
   });
 }
+
+class CartItem {
+  int userID;
+  List<CartMeal> meals;
+  double deliveryFee;
+
+  double subTotal() {
+    double temp = 0;
+    meals.forEach((e) {
+      temp += (e.meal.price * e.quantity).toDouble();
+    });
+    return temp;
+  }
+
+  CartItem({
+    required this.userID,
+    required this.deliveryFee,
+    required this.meals,
+  });
+}
+
+class CartMeal {
+  int quantity;
+  MealItem meal;
+
+  CartMeal({
+    required this.quantity,
+    required this.meal,
+  });
+}
